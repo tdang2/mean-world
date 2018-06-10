@@ -4,12 +4,18 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+require('dotenv').config({path: path.join(__dirname, '.env')});
 
 var apiRouter = require(path.join(__dirname, 'routes/book'));
 
 var app = express();
 
-mongoose.connect('mongodb://localhost/mean-world', { promiseLibrary: require('bluebird') })
+if (app.get('env') == 'development_azure') {
+  var mongod_env = require(path.join(__dirname, 'env/azure'));
+} else {
+  var mongod_env = require(path.join(__dirname, 'env/local'));
+}
+mongoose.connect(mongod_env.mongodb_url, mongod_env.mongo_options)
   .then(() =>  console.log('connection successful'))
   .catch((err) => console.error(err));
 
