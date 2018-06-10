@@ -1,3 +1,9 @@
+# MeanWorld Stack
+Docker 
+MEAN stack - Angular 6
+Angular Material
+CosmoDB
+
 # MeanWorld
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.

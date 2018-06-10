@@ -5,7 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 
-var apiRouter = require(path.join(__dirname, 'server/routes/book'));
+var apiRouter = require(path.join(__dirname, 'routes/book'));
 
 var app = express();
 
@@ -16,8 +16,8 @@ mongoose.connect('mongodb://localhost/mean-world', { promiseLibrary: require('bl
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'dist/mean-world')));
-app.use('/', express.static(path.join(__dirname, 'dist/mean-world')));
+app.use(express.static(path.join(__dirname, '../dist/mean-world')));
+app.use('/', express.static(path.join(__dirname, '../dist/mean-world')));
 app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
@@ -32,8 +32,8 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
-  res.send(err.status);
+  res.sendStatus(err.status || 500);
+  res.sendStatus(err.status);
 });
 
 module.exports = app;
