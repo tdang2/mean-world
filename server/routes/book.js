@@ -1,7 +1,14 @@
 var express = require('express');
 var router = express.Router();
+var path = require('path');
 var mongoose = require('mongoose');
 var Book = require('../models/book.js');
+const { EventHubClient, EventData } = require("azure-event-hubs");
+var env = require(path.join(__dirname, '../env/azure'));
+
+const client = EventHubClient.createFromConnectionString(
+  env.eventHubConnectionString, env.eventHubentityPath  
+);
 
 /* GET ALL BOOKS */
 router.get('/', function(req, res, next) {
@@ -14,7 +21,7 @@ router.get('/', function(req, res, next) {
 /* GET SINGLE BOOK BY ID */
 router.get('/:id', function(req, res, next) {
   Book.findById(req.params.id, function (err, post) {
-    if (err) return next(err);
+    if (err) return next(err);    
     res.json(post);
   });
 });
@@ -23,6 +30,8 @@ router.get('/:id', function(req, res, next) {
 router.post('/', function(req, res, next) {
   Book.create(req.body, function (err, post) {
     if (err) return next(err);
+    const data = {body: post};
+    client.send(data);
     res.json(post);
   });
 });
