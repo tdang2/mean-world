@@ -30,7 +30,7 @@ router.get('/:id', function(req, res, next) {
 router.post('/', function(req, res, next) {
   Book.create(req.body, function (err, post) {
     if (err) return next(err);
-    const data = {body: post};
+    const data = {body: {data: post, action: 'create'}};
     client.send(data);
     res.json(post);
   });
@@ -48,6 +48,8 @@ router.put('/:id', function(req, res, next) {
 router.delete('/:id', function(req, res, next) {
   Book.findByIdAndRemove(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
+    const data = {body: {data: post, action: 'edit'}};
+    client.send(data);
     res.json(post);
   });
 });
