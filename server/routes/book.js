@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router();
+var bookRouter = express.Router();
 var path = require('path');
 var mongoose = require('mongoose');
 var Book = require('../models/book.js');
@@ -11,7 +11,7 @@ const client = EventHubClient.createFromConnectionString(
 );
 
 /* GET ALL BOOKS */
-router.get('/', function(req, res, next) {
+bookRouter.get('/', function(req, res, next) {
   Book.find(function (err, products) {
     if (err) return next(err);
     res.json(products);
@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET SINGLE BOOK BY ID */
-router.get('/:id', function(req, res, next) {
+bookRouter.get('/:id', function(req, res, next) {
   Book.findById(req.params.id, function (err, post) {
     if (err) return next(err);    
     res.json(post);
@@ -27,7 +27,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 /* SAVE BOOK */
-router.post('/', function(req, res, next) {
+bookRouter.post('/', function(req, res, next) {
   Book.create(req.body, function (err, post) {
     if (err) return next(err);
     const data = {body: {data: post, action: 'create'}};
@@ -37,7 +37,7 @@ router.post('/', function(req, res, next) {
 });
 
 /* UPDATE BOOK */
-router.put('/:id', function(req, res, next) {
+bookRouter.put('/:id', function(req, res, next) {
   Book.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
@@ -45,7 +45,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 /* DELETE BOOK */
-router.delete('/:id', function(req, res, next) {
+bookRouter.delete('/:id', function(req, res, next) {
   Book.findByIdAndRemove(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     const data = {body: {data: post, action: 'edit'}};
@@ -54,4 +54,4 @@ router.delete('/:id', function(req, res, next) {
   });
 });
 
-module.exports = router;
+module.exports = bookRouter;

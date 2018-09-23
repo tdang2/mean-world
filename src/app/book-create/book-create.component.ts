@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ApiService } from '../api/api.service';
+import { BookService } from '../api/book-api.service';
 
 @Component({
   selector: 'app-book-create',
@@ -17,7 +17,7 @@ export class BookCreateComponent implements OnInit {
   publisher: String = '';
   published_year: String = '';
 
-  constructor(private router: Router, private api: ApiService, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private api: BookService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.bookForm = this.formBuilder.group({

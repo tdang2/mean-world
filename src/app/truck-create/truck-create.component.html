@@ -1,0 +1,57 @@
+<div class="button-row">
+    <a mat-raised-button color="primary" [routerLink]="['/trucks']"><mat-icon>list</mat-icon></a>
+  </div>
+  <form [formGroup]="truckForm" (ngSubmit)="onFormSubmit(truckForm.value)">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="truckID" formControlName="truckID"
+             [errorStateMatcher]="matcher">
+      <mat-error>
+        <span *ngIf="!truckForm.get('truckID').valid && truckForm.get('truckID').touched">Please enter truck ID</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="driverID" formControlName="driverID"
+             [errorStateMatcher]="matcher">
+      <mat-error>
+        <span *ngIf="!truckForm.get('driverID').valid && truckForm.get('driverID').touched">Please enter driver ID</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="longitude" formControlName="longitude"
+             [errorStateMatcher]="matcher">
+      <mat-error>
+        <span *ngIf="!truckForm.get('longitude').valid && truckForm.get('longitude').touched">Please enter longitude</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="latitude" formControlName="latitude"
+             [errorStateMatcher]="matcher"></textarea>
+      <mat-error>
+        <span *ngIf="!truckForm.get('latitude').valid && truckForm.get('latitude').touched">Please enter latitude</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="speed" formControlName="speed"
+             [errorStateMatcher]="matcher">
+      <mat-error>
+        <span *ngIf="!truckForm.get('speed').valid && truckForm.get('speed').touched">Please enter speed</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="state" formControlName="state"
+             [errorStateMatcher]="matcher">
+      <mat-error>
+        <span *ngIf="!truckForm.get('state').valid && truckForm.get('state').touched">Please enter state</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="zipCode" formControlName="zipCode"
+              [errorStateMatcher]="matcher">
+      <mat-error>
+        <span *ngIf="!truckForm.get('zipCode').valid && truckForm.get('zipCode').touched">Please enter Zip Code</span>
+      </mat-error>
+    </mat-form-field>
+    <div class="button-row">
+      <button type="submit" [disabled]="!truckForm.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+    </div>
+  </form>

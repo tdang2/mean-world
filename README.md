@@ -1,12 +1,28 @@
 # MeanWorld Stack
-Docker 
+
+Docker
 MEAN stack - Angular 6
 Angular Material
 CosmoDB
 
-# MeanWorld
+## MeanWorld
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+
+## Running Meanworld
+
+package.json file under project folder define the list of available scrip command
+Use "npm start" to run after update all environment variables under
+
+- server/env/azure.js or server/env/local.js
+- .env at project folder. Require envrionment variables are DEBUG_DEVELOPMENT_PORT (default to 4200) and NODE_ENV (default to 'development_azure' to use Azure cosmodb)
+
+## Running Meanworld while developing
+
+During development, there might be a need to run express server and angular separately to isolate development features. We can do that by setting file src/environments/environment.ts api_host to 'localhost:<express_port>'. The default port value for express server is 3000
+To use Azure cosmo db instead of local mongodb, set NODE_ENV to 'development_azure'. Leaving this environment variable empty will set to use local mongodb
+To run express server separately, use "node .\bin\www.js'. Note that this will serve the last built angular code from dist folder
+To run angular separately, use 'ng serve'
 
 ## Development server
 

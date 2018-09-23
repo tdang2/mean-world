@@ -4,9 +4,9 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-require('dotenv').config({path: path.join(__dirname, '.env')});
-
-var apiRouter = require(path.join(__dirname, 'routes/book'));
+require('dotenv').config({path: path.join(__dirname, '../.env')});
+var apiBookRouter = require(path.join(__dirname, 'routes/book'));
+var apiTruckRouter = require(path.join(__dirname, 'routes/truck'));
 
 var app = express();
 
@@ -22,9 +22,22 @@ mongoose.connect(mongod_env.mongodb_url, mongod_env.mongo_options)
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.all('*', function(req, res, next) {
+  var allowedOrigins = ['http://127.0.0.1:3000', 'http://localhost:4200', 'http://127.0.0.1:4200', 'http://localhost:3000'];
+  var origin = req.headers.origin;
+  if(allowedOrigins.indexOf(origin) > -1) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
 app.use(express.static(path.join(__dirname, '../dist/mean-world')));
 app.use('/', express.static(path.join(__dirname, '../dist/mean-world')));
-app.use('/api', apiRouter);
+app.use('/api/books', apiBookRouter);
+app.use('/api/trucks', apiTruckRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

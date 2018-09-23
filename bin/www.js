@@ -3,15 +3,15 @@
 /**
  * Module dependencies.
  */
-
+var path = require('path');
 var app = require('../server/app');
 var debug = require('debug')('mean-world:server');
 var http = require('http');
+require('dotenv').config({path: path.join(__dirname, '.env')});
 
 /**
  * Get port from environment and store in Express.
  */
-
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 

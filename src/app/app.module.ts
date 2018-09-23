@@ -21,6 +21,8 @@ import { BookDetailComponent } from './book-detail/book-detail.component';
 import { BookCreateComponent } from './book-create/book-create.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TruckComponent } from './truck/truck.component';
+import { TruckCreateComponent } from './truck-create/truck-create.component';
 
 const appRoutes: Routes = [
   {
@@ -43,8 +45,18 @@ const appRoutes: Routes = [
     component: BookEditComponent,
     data: { title: 'Edit Book' }
   },
+  {
+    path: 'trucks',
+    component: TruckComponent,
+    data: { title: 'Truck List' }
+  },
+  {
+    path: 'truck-create',
+    component: TruckCreateComponent,
+    data: { title: 'Create Truck' }
+  },
   { path: '',
-    redirectTo: '/books',
+    redirectTo: '/trucks',
     pathMatch: 'full'
   }
 ];
@@ -56,7 +68,9 @@ const appRoutes: Routes = [
     BookComponent,
     BookDetailComponent,
     BookCreateComponent,
-    BookEditComponent
+    BookEditComponent,
+    TruckComponent,
+    TruckCreateComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

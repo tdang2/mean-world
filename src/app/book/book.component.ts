@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api/api.service';
+import { BookService } from '../api/book-api.service';
 import { DataSource } from '@angular/cdk/collections';
-import { Observable } from 'rxjs';
 
 
 export class BookDataSource extends DataSource<any> {
-  constructor(private api: ApiService) {
+  constructor(private api: BookService) {
     super();
   }
 
@@ -26,7 +25,7 @@ export class BookComponent implements OnInit {
   displayedColumns = ['isbn', 'title', 'author'];
   dataSource = new BookDataSource(this.api);
 
-  constructor(private api: ApiService) { }
+  constructor(private api: BookService) { }
 
   ngOnInit() {
     this.api.getBooks().subscribe(res => {
