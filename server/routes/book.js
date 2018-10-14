@@ -20,37 +20,37 @@ bookRouter.get('/', function(req, res, next) {
 
 /* GET SINGLE BOOK BY ID */
 bookRouter.get('/:id', function(req, res, next) {
-  Book.findById(req.params.id, function (err, post) {
+  Book.findById(req.params.id, function (err, book) {
     if (err) return next(err);    
-    res.json(post);
+    res.json(book);
   });
 });
 
 /* SAVE BOOK */
 bookRouter.post('/', function(req, res, next) {
-  Book.create(req.body, function (err, post) {
+  Book.create(req.body, function (err, book) {
     if (err) return next(err);
-    const data = {body: {data: post, action: 'create'}};
+    const data = {body: {data: book, action: 'create'}};
     client.send(data);
-    res.json(post);
+    res.json(book);
   });
 });
 
 /* UPDATE BOOK */
 bookRouter.put('/:id', function(req, res, next) {
-  Book.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+  Book.findByIdAndUpdate(req.params.id, req.body, function (err, book) {
     if (err) return next(err);
-    res.json(post);
+    res.json(book);
   });
 });
 
 /* DELETE BOOK */
 bookRouter.delete('/:id', function(req, res, next) {
-  Book.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+  Book.findByIdAndRemove(req.params.id, req.body, function (err, book) {
     if (err) return next(err);
-    const data = {body: {data: post, action: 'edit'}};
+    const data = {body: {data: book, action: 'edit'}};
     client.send(data);
-    res.json(post);
+    res.json(book);
   });
 });
 

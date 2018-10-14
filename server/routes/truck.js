@@ -12,9 +12,9 @@ const client = EventHubClient.createFromConnectionString(
 
 /* GET ALL TRUCKS */
 truckRouter.get('/', function(req, res, next) {
-  Truck.find(function (err, products) {
+  Truck.find(function (err, trucks) {
     if (err) return next(err);
-    res.json(products);
+    res.json(trucks);
   });
 });
 
@@ -32,7 +32,7 @@ truckRouter.post('/', function(req, res, next) {
     if (err) return next(err);
     const data = {body: {data: truck, action: 'create'}};
     client.send(data);
-    res.json(post);
+    res.json(truck);
   });
 });
 
@@ -41,7 +41,7 @@ truckRouter.put('/:id', function(req, res, next) {
   Truck.findByIdAndUpdate(req.params.id, req.body, function (err, truck) {
     if (err) return next(err);
     const data = {body: {data: truck, action: 'update'}};
-    client.send(truck);
+    client.send(data);
     res.json(truck);
   });
 });
@@ -51,8 +51,8 @@ truckRouter.delete('/:id', function(req, res, next) {
   Truck.findByIdAndRemove(req.params.id, req.body, function (err, truck) {
     if (err) return next(err);
     const data = {body: {data: truck, action: 'remove'}};
-    client.send(truck);
-    res.json(post);
+    client.send(data);
+    res.json(truck);
   });
 });
 
