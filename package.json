@@ -22,7 +22,6 @@
     "@angular/platform-browser": "^6.1.9",
     "@angular/platform-browser-dynamic": "^6.1.9",
     "@angular/router": "^6.1.9",
-    "azure-event-hubs": "^0.2.11",
     "bcrypt": "^3.0.1",
     "body-parser": "^1.18.3",
     "core-js": "^2.5.4",

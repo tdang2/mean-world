@@ -19,10 +19,17 @@ Use "npm start" to run after update all environment variables under
 
 ## Running Meanworld while developing
 
-During development, there might be a need to run express server and angular separately to isolate development features. We can do that by setting file src/environments/environment.ts api_host to 'localhost:<express_port>'. The default port value for express server is 3000
-To use Azure cosmo db instead of local mongodb, set NODE_ENV to 'development_azure'. Leaving this environment variable empty will set to use local mongodb
-To run express server separately, use "node .\bin\www.js'. Note that this will serve the last built angular code from dist folder
-To run angular separately, use 'ng serve'
+During development, there might be a need to run express server and angular separately to isolate development features. We can do that by:
+
+- Set api_host in file 'src/environments/environment.ts' to localhost:<express_port>. The default port is 3000
+- To run express server separately, use "node .\bin\www.js'. Note that this will serve the last built angular code from dist folder
+- To run angular separately, use 'ng serve'
+
+To use Azure cosmo db instead of local mongodb, set NODE_ENV to'development_azure'. Leaving this environment variable empty will set to use local mongodb
+
+## JWT secret
+
+Use "openssl rand -based64 32" to generate 32 characters random string
 
 ## Development server
 
