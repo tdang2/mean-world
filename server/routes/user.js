@@ -1,7 +1,5 @@
 var express = require('express');
 var userRouter = express.Router();
-var path = require('path');
-var mongoose = require('mongoose');
 var User = require('../models/user.js');
 
 /* GET ALL USERS */

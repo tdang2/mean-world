@@ -3,12 +3,7 @@ var bookRouter = express.Router();
 var path = require('path');
 var mongoose = require('mongoose');
 var Book = require('../models/book.js');
-const { EventHubClient, EventData } = require("azure-event-hubs");
 var env = require(path.join(__dirname, '../env/azure'));
-
-const client = EventHubClient.createFromConnectionString(
-  env.eventHubConnectionString, env.eventHubentityPath  
-);
 
 /* GET ALL BOOKS */
 bookRouter.get('/', function(req, res, next) {
@@ -31,7 +26,6 @@ bookRouter.post('/', function(req, res, next) {
   Book.create(req.body, function (err, book) {
     if (err) return next(err);
     const data = {body: {data: book, action: 'create'}};
-    client.send(data);
     res.json(book);
   });
 });
@@ -49,7 +43,6 @@ bookRouter.delete('/:id', function(req, res, next) {
   Book.findByIdAndRemove(req.params.id, req.body, function (err, book) {
     if (err) return next(err);
     const data = {body: {data: book, action: 'edit'}};
-    client.send(data);
     res.json(book);
   });
 });

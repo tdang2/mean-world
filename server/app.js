@@ -5,6 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 require('dotenv').config({path: path.join(__dirname, '../.env')});
+const apiAuth = require(path.join(__dirname, 'routes/login'));
 const apiBookRouter = require(path.join(__dirname, 'routes/book'));
 const apiTruckRouter = require(path.join(__dirname, 'routes/truck'));
 const apiUserRouter = require(path.join(__dirname, 'routes/user'));
@@ -37,6 +38,7 @@ app.all('*', function(req, res, next) {
 });
 app.use(express.static(path.join(__dirname, '../dist/mean-world')));
 app.use('/', express.static(path.join(__dirname, '../dist/mean-world')));
+app.use('/api/auth', apiAuth);
 app.use('/api/users', apiUserRouter);
 app.use('/api/books', apiBookRouter);
 app.use('/api/trucks', apiTruckRouter);
@@ -53,7 +55,6 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  console.log(err);
   res.sendStatus(err.status || 500);
   res.sendStatus(err.status);
 });
